@@ -1,4 +1,6 @@
-# Final 
+---
+final report
+---
 
 ## read train.csv into dataframe
 
@@ -45,6 +47,7 @@ library(ggplot2)
 qplot(x=value,data=df_tidy_factors,fill=Survived) + facet_grid(~feature,scales="free")
 ```
 
+![pic](/picture/naiveGraph.JPG)
 
 
 ```{r}
@@ -70,4 +73,4 @@ submit <- data.frame(PassengerId =ids, Survived = pred)
 write.csv(submit, file = "naive.csv", row.names = FALSE)
 ```
 
-
+![pic](/picture/naive.PNG)
