@@ -1,6 +1,7 @@
----
-final report
----
+# final report
+## Erez Bashari 
+## Yakir Zana
+
 
 ## read train.csv into dataframe
 
