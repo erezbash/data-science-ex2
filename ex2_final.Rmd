@@ -4,6 +4,37 @@
 
 # First Try: KNN
 
+```{r}
+df <- read.csv("Titanic/train.csv",na.strings = "")
+df$Survived<- as.factor(df$Survived)
+df$Pclass<- as.factor(df$Pclass)
+df <- df[,-c(1,4,9,11)]
+```
+
+```{r}
+indices <- sample(1:nrow(df),nrow(df)*0.8)
+traindf<- df[indices,]
+testdf<- df[-indices,]
+```
+
+```{r}
+#install.packages('e1071')
+library(e1071)
+nb_model <- naiveBayes(Survived~.,data = df)
+```
+
+```{r}
+new_df <-read.csv('Titanic/test.csv',na.strings = "")
+ids<- new_df$PassengerId
+new_df$Pclass<- as.factor(new_df$Pclass)
+new_df<- new_df[,-c(1,3,8,10)]
+pred <- predict(nb_model,new_df,na.action = na.pass)
+```
+
+```{r}
+submit <- data.frame(PassengerId =ids, Survived = pred)
+write.csv(submit, file = "naive.csv", row.names = FALSE)
+```
 
 # Second Try: C5.0
 
@@ -73,3 +104,5 @@ write.csv(submit, file = "naive.csv", row.names = FALSE)
 ![pic](/picture/C50.PNG)
 
 # Third Try: Random Forest
+
+
