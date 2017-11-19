@@ -105,4 +105,90 @@ write.csv(submit, file = "naive.csv", row.names = FALSE)
 
 # Third Try: Random Forest
 
+```{r}
+dfTrain <- read.csv("Titanic/train.csv",na.strings = "")
+dfTest <- read.csv("Titanic/test.csv",na.strings = "")
+```
+
+
+# Load required packages
+```{r}
+library(rpart)
+library(randomForest)
+library(party)
+```
+
+
+# Join together the test and train sets for make pred for NAs fields
+```{r}
+dfTest$Survived <- NA
+combind <- rbind(dfTrain, dfTest)
+```
+
+
+# Convert Name to a string
+```{r}
+combind$Name <- as.character(combind$Name)
+```
+
+
+# Create new variable: Title
+```{r}
+combind$Title <- sapply(combind$Name, FUN=function(x) {strsplit(x, split='[,.]')[[1]][2]})
+combind$Title <- sub(' ', '', combind$Title)
+```
+
+
+# Combind small grupe of titles to one gruop
+```{r}
+combind$Title[combind$Title %in% c('Mme', 'Mlle')] <- 'Mlle'
+combind$Title[combind$Title %in% c('Dona', 'Lady', 'the Countess', 'Jonkheer')] <- 'Lady'
+combind$Title[combind$Title %in% c('Capt', 'Don', 'Major', 'Sir')] <- 'Sir'
+```
+
+
+# Convert to a factor
+```{r}
+combind$Title <- factor(combind$Title)
+```
+
+
+# Fill in Age NAs with rpart for better predict
+```{r}
+Agefit <- rpart(Age ~ Pclass + Sex + SibSp + Parch + Fare + Embarked + Title,
+                data=combind[!is.na(combind$Age),], method="anova")
+combind$Age[is.na(combind$Age)] <- predict(Agefit, combind[is.na(combind$Age),])
+```
+
+
+# Fill in Fare NAs with rpart for better predict
+```{r}
+Farefit <- rpart(Fare ~ Pclass + Sex + SibSp + Parch + Age + Embarked + Title,
+                data=combind[!is.na(combind$Fare),], method="anova")
+combind$Fare[is.na(combind$Fare)] <- predict(Farefit, combind[is.na(combind$Fare),])
+```
+
+
+# Split Again to test and train 
+```{r}
+train <- combind[1:891,]
+test <- combind[892:1309,]
+```
+
+
+# Build Random Forest
+```{r}
+fit <- cforest(as.factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked + Title,
+               data = train, controls=cforest_unbiased(ntree=2000, mtry=5)) 
+```
+
+
+# Bind PassengerId to the servived prediction and make csv
+```{r}
+Prediction <- predict(fit, test, OOB=TRUE, type = "response")
+submit <- data.frame(PassengerId = test$PassengerId, Survived = Prediction)
+write.csv(submit, file = "forest.csv", row.names = FALSE)
+```
+
+
 
