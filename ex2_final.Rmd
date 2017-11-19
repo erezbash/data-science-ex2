@@ -2,7 +2,7 @@
 ## Erez Bashari 
 ## Yakir Zana
 
-# First Try: KNN
+# First Try: NaiveBayes
 
 ```{r}
 df <- read.csv("Titanic/train.csv",na.strings = "")
