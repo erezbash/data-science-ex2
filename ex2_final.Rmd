@@ -67,4 +67,4 @@ submit <- data.frame(PassengerId =ids, Survived = pred)
 write.csv(submit, file = "naive.csv", row.names = FALSE)
 ```
 ## upload result to the kaggle Competition 
-![pic](/picture/naive.PNG)
+![pic](/picture/C50.PNG)
