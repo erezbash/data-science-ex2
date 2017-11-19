@@ -2,55 +2,49 @@
 ## Erez Bashari 
 ## Yakir Zana
 
+# first try: C50
 
 ## read train.csv into dataframe
-
 ```{r}
 #install.packages("knitr")
 library(knitr)
 df <- read.csv("Titanic/train.csv",na.strings = "")
-
 ```
 
 ## convert Survived column and Pclass column to factors
-
 ```{r}
 df$Survived<- as.factor(df$Survived)
 df$Pclass<- as.factor(df$Pclass)
 ```
 
 ## remove from df : PassengerId, Name, Ticket, Cabin
-
 ```{r}
 df <- df[,-c(1,4,9,11)]
 ```
 
 ## split into factors and numerics columns
-
 ```{r}
 cols<- 1:dim(df)[2]
 factors <- cols[sapply(df,is.factor)]
 numerics <- cols[!sapply(df,is.factor)]
 ```
 
-
 ## We now tide the data two times: the first is for categorial data and the second for numeric data.
-
 ```{r}
 #install.packages("tidyr")
 library(tidyr)
 df_tidy_factors<-gather(df[,factors],"feature","value",-1)
 df_tidy_numerics<-gather(cbind(Survived=df[,1],df[,numerics]),"feature","value",-1)
 ```
+
 ```{r}
 #install.packages("stringi")
 library(ggplot2)
 qplot(x=value,data=df_tidy_factors,fill=Survived) + facet_grid(~feature,scales="free")
 ```
-
 ![pic](/picture/naiveGraph.JPG)
 
-
+## Train using C50
 ```{r}
 #install.packages("C50")
 library(C50)
@@ -58,8 +52,7 @@ set.seed(123)
 C50 <-C5.0(Survived ~., data=df)
 ```
 
-
-
+## read test and predict servived using the trained model
 ```{r}
 new_df <-read.csv('Titanic/test.csv',na.strings = "")
 ids<- new_df$PassengerId
@@ -68,10 +61,10 @@ new_df<- new_df[,-c(1,3,8,10)]
 pred<- predict(C50,new_df)
 ```
 
-
+## bind PassengerId to the servived prediction
 ```{r}
 submit <- data.frame(PassengerId =ids, Survived = pred)
 write.csv(submit, file = "naive.csv", row.names = FALSE)
 ```
-
+## upload result to the kaggle Competition 
 ![pic](/picture/naive.PNG)
