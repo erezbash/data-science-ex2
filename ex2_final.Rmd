@@ -2,7 +2,10 @@
 ## Erez Bashari 
 ## Yakir Zana
 
-# first try: C50
+# First Try: KNN
+
+
+# Second Try: C5.0
 
 ## read train.csv into dataframe
 ```{r}
@@ -68,3 +71,5 @@ write.csv(submit, file = "naive.csv", row.names = FALSE)
 ```
 ## upload result to the kaggle Competition 
 ![pic](/picture/C50.PNG)
+
+# Third Try: Random Forest
