@@ -1,4 +1,6 @@
-##read train.csv into dataframe
+# Final 
+
+## read train.csv into dataframe
 
 ```{r}
 #install.packages("knitr")
@@ -7,20 +9,20 @@ df <- read.csv("Titanic/train.csv",na.strings = "")
 
 ```
 
-##convert Survived column and Pclass column to factors
+## convert Survived column and Pclass column to factors
 
 ```{r}
 df$Survived<- as.factor(df$Survived)
 df$Pclass<- as.factor(df$Pclass)
 ```
 
-##remove from df : PassengerId, Name, Ticket, Cabin
+## remove from df : PassengerId, Name, Ticket, Cabin
 
 ```{r}
 df <- df[,-c(1,4,9,11)]
 ```
 
-##split into factors and numerics columns
+## split into factors and numerics columns
 
 ```{r}
 cols<- 1:dim(df)[2]
@@ -29,7 +31,7 @@ numerics <- cols[!sapply(df,is.factor)]
 ```
 
 
-##We now tide the data two times: the first is for categorial data and the second for numeric data.
+## We now tide the data two times: the first is for categorial data and the second for numeric data.
 
 ```{r}
 #install.packages("tidyr")
