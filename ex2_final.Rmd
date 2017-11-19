@@ -17,7 +17,7 @@ df$Survived<- as.factor(df$Survived)
 df$Pclass<- as.factor(df$Pclass)
 ```
 
-## remove from df : PassengerId, Name, Ticket, Cabin
+## remove from df : PassengerId, Name, Ticket, Cabin. we decided to remove Cabin bacuse of the many N/A values and see that it really help to get better accuracy using C50
 ```{r}
 df <- df[,-c(1,4,9,11)]
 ```
