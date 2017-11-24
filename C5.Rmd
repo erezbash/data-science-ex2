@@ -40,17 +40,20 @@ library(tidyr)
 df_tidy_factors<-gather(df[,factors],"feature","value",-1)
 df_tidy_numerics<-gather(cbind(Survived=df[,1],df[,numerics]),"feature","value",-1)
 ```
-
+## plot only categorical features
 ```{r}
 #install.packages("stringi")
 library(ggplot2)
 qplot(x=value,data=df_tidy_factors,fill=Survived) + facet_grid(~feature,scales="free")
 ```
+![pic](/picture/C5_plot_1.PNG)
+
 
 ## plot for numeric features
 ```{r}
 qplot(x=value,data=df_tidy_numerics,fill=Survived) + facet_grid(~feature,scales="free")
 ```
+![pic](/picture/C5_plot_2.PNG)
 
 
 ## Train using C50
