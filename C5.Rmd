@@ -1,4 +1,4 @@
-# Second Try: C5.0 (using caret)
+# Second Try: C5.0 
 
 ## read train.csv into dataframe
 ```{r}
