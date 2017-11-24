@@ -5,7 +5,7 @@
 df <- read.csv("Titanic/train.csv",na.strings = "")
 ```
 
-##Check the datatypes
+## Check the datatypes
 ```{r}
 str(df)
 ```
@@ -16,7 +16,7 @@ df$Survived<- as.factor(df$Survived)
 df$Pclass<- as.factor(df$Pclass)
 ```
 
-##summary
+## summary
 ```{r}
 summary(df)
 ```
