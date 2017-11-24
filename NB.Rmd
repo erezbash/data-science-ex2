@@ -5,7 +5,7 @@
 df <- read.csv("Titanic/train.csv",na.strings = "")
 ```
 
-##Check the datatypes
+## Check the datatypes
 ```{r}
 str(df)
 ```
@@ -16,7 +16,7 @@ df$Survived<- as.factor(df$Survived)
 df$Pclass<- as.factor(df$Pclass)
 ```
 
-##summary
+## summary
 ```{r}
 summary(df)
 ```
@@ -26,15 +26,15 @@ summary(df)
 df <- df[,-c(1,4,9,11)]
 ```
 
-##Split the data into train and test sets
+## Split the data into train and test sets
 ```{r}
 indices <- sample(1:nrow(df),nrow(df)*0.8)
 traindf<- df[indices,]
 testdf<- df[-indices,]
 ```
 
-#load e1071 library and invoke naiveBayes method
-#Train the model based on the train set:
+## load e1071 library and invoke naiveBayes method
+## Train the model based on the train set:
 ```{r}
 #install.packages('e1071')
 library(e1071)
@@ -61,7 +61,7 @@ new_df$Pclass<- as.factor(new_df$Pclass)
 new_df<- new_df[,-c(1,3,8,10)]
 ```
 
-##predict servived using the trained model
+## predict servived using the trained model
 ```{r}
 pred <- predict(nb_model,new_df,na.action = na.pass)
 ```
