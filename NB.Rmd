@@ -1,0 +1,73 @@
+# First Try: NaiveBayes
+
+## read train.csv into dataframe
+```{r}
+df <- read.csv("Titanic/train.csv",na.strings = "")
+```
+
+##Check the datatypes
+```{r}
+str(df)
+```
+
+## convert Survived column and Pclass column to factors
+```{r}
+df$Survived<- as.factor(df$Survived)
+df$Pclass<- as.factor(df$Pclass)
+```
+
+##summary
+```{r}
+summary(df)
+```
+
+## remove from df : PassengerId, Name, Ticket, Cabin. we decided to remove Cabin bacuse of the many N/A values and see that it really help to get better accuracy
+```{r}
+df <- df[,-c(1,4,9,11)]
+```
+
+##Split the data into train and test sets
+```{r}
+indices <- sample(1:nrow(df),nrow(df)*0.8)
+traindf<- df[indices,]
+testdf<- df[-indices,]
+```
+
+#load e1071 library and invoke naiveBayes method
+#Train the model based on the train set:
+```{r}
+#install.packages('e1071')
+library(e1071)
+nb_model <- naiveBayes(Survived~.,data = df)
+```
+
+## read train.csv into new dataframe
+```{r}
+new_df <-read.csv('Titanic/test.csv',na.strings = "")
+```
+
+## save PassengerId
+```{r}
+ids<- new_df$PassengerId
+```
+
+## convert Survived column and Pclass column to factors
+```{r}
+new_df$Pclass<- as.factor(new_df$Pclass)
+```
+
+## remove from df : PassengerId, Name, Ticket, Cabin. we decided to remove Cabin bacuse of the many N/A values and see that it really help to get better accuracy
+```{r}
+new_df<- new_df[,-c(1,3,8,10)]
+```
+
+##predict servived using the trained model
+```{r}
+pred <- predict(nb_model,new_df,na.action = na.pass)
+```
+
+## bind PassengerId to the servived prediction & write result to .csv file
+```{r}
+submit <- data.frame(PassengerId =ids, Survived = pred)
+write.csv(submit, file = "naive_base.csv", row.names = FALSE)
+```
