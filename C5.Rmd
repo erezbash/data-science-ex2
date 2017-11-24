@@ -68,6 +68,8 @@ C50 <-C5.0(Survived ~., data=df)
 ```{r}
 summary(C50)
 ```
+![pic](/picture/C5_summary.PNG)
+
 
 ## read train.csv into new dataframe
 ```{r}
