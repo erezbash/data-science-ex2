@@ -101,4 +101,5 @@ pred<- predict(C50,new_df)
 submit <- data.frame(PassengerId =ids, Survived = pred)
 write.csv(submit, file = "C5.csv", row.names = FALSE)
 ```
-
+## upload result to the kaggle Competition
+![pic](/picture/C5_Score.PNG)
