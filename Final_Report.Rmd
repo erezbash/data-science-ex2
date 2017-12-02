@@ -2,6 +2,9 @@
 ## Erez Bashari 
 ## Yakir Zana
 
+# Our Best Score:
+![pic](/picture/RF_SCORE.PNG)
+
 # First Try: NaiveBayes
 
 ## [link NB.RMD](NB.Rmd)
@@ -18,7 +21,7 @@ It is a classification technique based on Bayes’ Theorem with an assumption of
 
 ## [link NB.csv](NB.csv)
 
-## upload result to the kaggle Competition
+## Upload result to the kaggle Competition
 ![pic](/picture/NB_Score.PNG)
 
 
@@ -37,7 +40,7 @@ It is a classification technique based on Bayes’ Theorem with an assumption of
 is an algorithm used to generate a decision tree that can be used for classification.
 builds decision trees from a set of training data using the concept of information entropy( the average amount of information produced by a stochastic source of data).
 
-## tide the data two times: the first is for categorial data and the second for numeric data:
+## Tide the data two times: the first is for categorial data and the second for numeric data:
 
 ![pic](/picture/C5_plot_1.PNG)
 
@@ -45,7 +48,7 @@ builds decision trees from a set of training data using the concept of informati
 
 ## [link C5.csv](C5.csv)
 
-## upload result to the kaggle Competition
+## Upload result to the kaggle Competition
 ![pic](/picture/C50.PNG)
 
 
@@ -65,11 +68,11 @@ builds decision trees from a set of training data using the concept of informati
 Random Forests grows many classification trees. To classify a new object from an input vector, put the input vector down each of the trees in the forest. Each tree gives a classification, and we say the tree "votes" for that class. The forest chooses the classification having the most votes (over all the trees in the forest).
 Using a statistical test.
 
-## here we can see how much important is the title
+## Here we can see how much important is the title
 ![pic](/picture/varImp.JPG)
 
 ## [link forest.csv](forest.csv)
 
-## upload result to the kaggle Competition
+## Upload result to the kaggle Competition
 ![pic](/picture/RF_SCORE.PNG)
 
