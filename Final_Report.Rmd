@@ -69,4 +69,5 @@ Using a statistical test.
 ## [link forest.csv](forest.csv)
 
 ## upload result to the kaggle Competition
+![pic](/picture/RF_SCORE.PNG)
 
