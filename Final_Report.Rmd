@@ -66,7 +66,7 @@ Random Forests grows many classification trees. To classify a new object from an
 Using a statistical test.
 
 ## here we can see how much important is the title
-![pic](/picture/RF_SCORE.PNG)
+![pic](/picture/varImp.JPG)
 
 ## [link forest.csv](forest.csv)
 
