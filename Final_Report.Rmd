@@ -51,7 +51,7 @@ builds decision trees from a set of training data using the concept of informati
 
 # Third Try: Random Forest
 
-## [link C5.RMD](C5.Rmd)
+## [link RF.RMD](RF.Rmd)
 
 ## Pre-processing:
 * read train.csv file
