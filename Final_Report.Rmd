@@ -50,3 +50,22 @@ builds decision trees from a set of training data using the concept of informati
 
 
 # Third Try: Random Forest
+
+## [link C5.RMD](C5.Rmd)
+
+## Pre-processing:
+* read train.csv file
+* read test.csv file
+* join together the test and train sets for make pred for NAs fields
+* convert Name to a string for spliting
+* create new variable: Title, that come from the name and make him a factor.
+* fill Age and Fare NAs with prdeditction in rpart at the combind data.
+
+## Random Forest:
+Random Forests grows many classification trees. To classify a new object from an input vector, put the input vector down each of the trees in the forest. Each tree gives a classification, and we say the tree "votes" for that class. The forest chooses the classification having the most votes (over all the trees in the forest).
+
+
+## [link forest.csv](forest.csv)
+
+## upload result to the kaggle Competition
+
